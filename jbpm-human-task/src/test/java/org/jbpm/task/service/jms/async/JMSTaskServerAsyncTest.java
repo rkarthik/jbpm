@@ -24,16 +24,15 @@ import org.jbpm.task.service.ContentData;
 import org.jbpm.task.service.TaskClient;
 import org.jbpm.task.service.TaskServer;
 import org.jbpm.task.service.TaskService;
-import org.jbpm.task.service.TaskServiceSession;
 import org.jbpm.task.service.jms.JMSTaskClientConnector;
 import org.jbpm.task.service.jms.JMSTaskClientHandler;
 import org.jbpm.task.service.jms.JMSTaskServer;
+import org.jbpm.task.service.persistence.TaskServiceSession;
 import org.jbpm.task.service.responsehandlers.BlockingAddTaskResponseHandler;
 
 /**
  * Test case to see if this component works.
  * 
- * @author Mariano De Maio
  */
 public class JMSTaskServerAsyncTest extends TestCase {
 

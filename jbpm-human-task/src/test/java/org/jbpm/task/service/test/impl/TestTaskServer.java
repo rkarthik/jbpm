@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package org.jbpm.task.service.hornetq;
+package org.jbpm.task.service.test.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.drools.SystemEventListenerFactory;
+import org.jbpm.task.service.TaskService;
 
-import org.drools.task.service.ResponseHandler;
-import org.jbpm.task.service.BaseHandler;
+public class TestTaskServer extends BaseTestTaskServer implements Runnable {
 
-public class BaseHornetQHandler implements BaseHandler {
-
-	protected Map<Integer, ResponseHandler> responseHandlers;
-
-	public BaseHornetQHandler() {
-		responseHandlers = new HashMap<Integer, ResponseHandler>();
+	TestTaskServer(TaskService service) {
+		super(new TestTaskServerHandler(service, SystemEventListenerFactory.getSystemEventListener()));
 	}
-
-	public void addResponseHandler(int id, ResponseHandler responseHandler) {
-		responseHandlers.put( id, responseHandler );
+	
+	TestTaskServer(TaskService service, boolean sequentialOperation) {
+		super(new TestTaskServerHandler(service, SystemEventListenerFactory.getSystemEventListener()), sequentialOperation);
 	}
 
 }

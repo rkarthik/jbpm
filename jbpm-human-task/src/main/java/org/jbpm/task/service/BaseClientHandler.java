@@ -14,9 +14,24 @@
  * limitations under the License.
  */
 
-package org.jbpm.client;
+package org.jbpm.task.service;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public enum KnowledgeBaseCommandName {   
-    
+import org.drools.task.service.ResponseHandler;
+import org.jbpm.task.service.BaseHandler;
+
+public class BaseClientHandler implements BaseHandler {
+
+	protected Map<Integer, ResponseHandler> responseHandlers;
+
+	public BaseClientHandler() {
+		responseHandlers = new HashMap<Integer, ResponseHandler>();
+	}
+
+	public void addResponseHandler(int id, ResponseHandler responseHandler) {
+		responseHandlers.put( id, responseHandler );
+	}
+
 }

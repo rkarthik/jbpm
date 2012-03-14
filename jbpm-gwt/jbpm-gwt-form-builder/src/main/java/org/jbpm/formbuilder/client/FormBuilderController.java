@@ -77,12 +77,12 @@ public class FormBuilderController {
             }
         });
         bus.addHandler(UserIsLoggedOutEvent.TYPE, new UserIsLoggedOutHandler() {
-			@Override
-			public void onEvent(UserIsLoggedOutEvent event) {
-				Window.alert("User is login timeout");
-				Window.Location.reload();
-			}
-		});
+            @Override
+            public void onEvent(UserIsLoggedOutEvent event) {
+                Window.alert("User is login timeout");
+                Window.Location.reload();
+            }
+        });
         new HistoryPresenter();
         RoleUtils.getInstance();
         FormEncodingFactory.register(FormEncodingClientFactory.getEncoder(), FormEncodingClientFactory.getDecoder());

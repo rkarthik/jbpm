@@ -14,7 +14,7 @@
 
   <name>jBPM GWT Console Shared</name>
 
-	<dependencies>
+    <dependencies>
         <dependency>
           <groupId>org.antlr</groupId>
           <artifactId>stringtemplate</artifactId>
@@ -32,9 +32,9 @@
           <artifactId>slf4j-log4j12</artifactId>
         </dependency>
         <dependency>
-  	  <groupId>commons-codec</groupId>
-  	  <artifactId>commons-codec</artifactId>
-	</dependency>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+        </dependency>
         <dependency>
           <groupId>com.sun.xml.stream</groupId>
           <artifactId>sjsxp</artifactId>
@@ -43,6 +43,6 @@
           <groupId>javax.xml</groupId>
           <artifactId>jsr173</artifactId>
         </dependency>
-	</dependencies>
+    </dependencies>
 
 </project>

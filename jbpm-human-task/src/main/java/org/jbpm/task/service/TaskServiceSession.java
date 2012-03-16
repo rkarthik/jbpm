@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jbpm.task.service.persistence;
+package org.jbpm.task.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,24 +46,12 @@ import org.jbpm.task.Task;
 import org.jbpm.task.TaskData;
 import org.jbpm.task.User;
 import org.jbpm.task.query.TaskSummary;
-import org.jbpm.task.service.Allowed;
-import org.jbpm.task.service.CannotAddTaskException;
-import org.jbpm.task.service.ContentData;
-import org.jbpm.task.service.EscalatedDeadlineHandler;
-import org.jbpm.task.service.FaultData;
-import org.jbpm.task.service.Operation;
-import org.jbpm.task.service.OperationCommand;
-import org.jbpm.task.service.PermissionDeniedException;
-import org.jbpm.task.service.SendIcal;
-import org.jbpm.task.service.TaskException;
-import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.TaskService.ScheduledTaskDeadline;
-import org.jbpm.task.service.TaskServiceRequest;
-import org.jbpm.task.service.UserGroupCallbackManager;
+import org.jbpm.task.service.persistence.TaskPersistenceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TaskServiceSession {
+public class TaskServiceSession extends TaskPersistenceManagerAccessor {
 
     private final TaskPersistenceManager tpm;
     
@@ -76,7 +64,7 @@ public class TaskServiceSession {
 
     public TaskServiceSession(final TaskService service, final EntityManagerFactory emf) {
         this.service = service;
-        this.tpm = new TaskPersistenceManager(emf);
+        this.tpm = getTaskPersistenceManagerFactory().newTaskPersistenceManager(emf);
     }
     
     public void dispose() {
@@ -425,9 +413,6 @@ public class TaskServiceSession {
             tpm.endTransaction(transactionOwner);
             
         } catch (RuntimeException re) {
-            
-            // DBG
-            re.printStackTrace();
             
             // We may not be the tx owner -- but something has gone wrong.
             // ..which is why we make ourselves owner, and roll the tx back. 
@@ -907,9 +892,6 @@ public class TaskServiceSession {
             
             tpm.endTransaction(txOwner);
         } catch(Exception e) {
-            // DBG
-            e.printStackTrace();
-            
             tpm.rollBackTransaction(txOwner);
             
             String message; 
